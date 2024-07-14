@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> head}}
+    <style>
+       /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');*/
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+             background: url('/public/img/background.jpeg') no-repeat center center fixed; /* Background image */
+            background-size: cover; /* Ensure the background covers the whole page */
+           /*  background: linear-gradient(to right, #4b6cb7, #182848); /* Gradient background */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h2, h3 {
+            margin: 10px 0;
+        }
+
+        input[type=text] {
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 25px;
+            background-color: white;
+            color: black;
+            font-size: 16px;
+            width: 250px;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type=text]:focus {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            background-color: #04010100;
+            color: white;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #04010100;
+            transform: scale(1.1);
+        }
+
+        #errorMessage {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chess Game</h2>
+        <h3>Enter Game Code</h3>
+        <input type="text" id="codeInput" placeholder="Enter game code">
+        <br>
+        <button id="createGame">Create Game</button>
+        <button id="joinGame">Join Game</button>
+        <div id="errorMessage"></div>
+    </div>
+
+    <script src="/public/js/jquery-3.7.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#createGame').on('click', function() {
+                var code = $('#codeInput').val().trim();
+                if (code === '') {
+                    showError('Please enter a game code.');
+                    return;
+                }
+                window.location.href = '/white?code=' + code;
+            });
+
+            $('#joinGame').on('click', function() {
+                var code = $('#codeInput').val().trim();
+                if (code === '') {
+                    showError('Please enter a game code.');
+                    return;
+                }
+                window.location.href = '/black?code=' + code;
+            });
+
+            var urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('error') === 'invalidCode') {
+                showError('Invalid invite code.');
+            }
+
+            function showError(message) {
+                $('#errorMessage').text(message);
+            }
+        });
+    </script>
+</body>
+</html>

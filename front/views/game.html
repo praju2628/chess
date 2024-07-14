@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> head}}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background: url('/public/img/background.jpeg') no-repeat center center fixed; /* Background image */
+            background-size: cover; /* Ensure the background covers the whole page */
+            color: white;
+        }
+        #boardContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        #myBoard {
+            width: 550px;
+            margin-right: 20px;
+        }
+        #textContainer {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            margin-left: 50px;
+        }
+        #statusContainer, #pgnContainer {
+            margin-bottom: 10px;
+        }
+        #status, #pgn {
+            margin: 0;
+            font-size: 24px; /* Increased font size */
+        }
+        
+        #timers {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .timer {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="timers">
+        <div id="whiteTimer" class="timer">White: 10:00</div>
+        <div id="blackTimer" class="timer">Black: 10:00</div>
+    </div>
+    <div id="boardContainer">
+        <div id="myBoard"></div>
+        <div id="textContainer">
+            <div id="statusContainer">
+                <label for="status">Status:</label>
+                <div id="status">Game in Progress</div> <!-- Example status text -->
+            </div>
+            <div id="pgnContainer">
+                <label for="pgn">PGN:</label>
+                <div id="pgn">1. e4 e5 2. Nf3 Nc6</div> <!-- Example PGN moves -->
+            </div>
+           <!--<div id="centipawnLossContainer">
+                <label for="centipawnLoss">Centipawn Loss:</label>
+                <div id="centipawnLoss">0</div>
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        let playerColor = '{{color}}';
+        console.log('Playing as ' + playerColor);
+    </script>
+    <script src="/public/js/jquery-3.7.0.min.js"></script>
+    <script src="/public/js/chess-0.10.3.min.js"></script>
+    <script src="/public/js/chessboard-1.0.0.min.js"></script>
+    <script src="/public/js/index.js"></script>
+</body>
+</html>
